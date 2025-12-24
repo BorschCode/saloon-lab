@@ -16,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Saloon\Http\Auth\TokenAuthenticator;
 
 class GitHubApiController extends Controller
 {
@@ -31,7 +32,7 @@ class GitHubApiController extends Controller
         $token = $request->input('token');
 
         if ($token) {
-            $this->github->authenticate($token);
+            $this->github->authenticate(new TokenAuthenticator($token));
         }
 
         $response = $this->github->send(new GetAuthenticatedUser);
@@ -91,7 +92,7 @@ class GitHubApiController extends Controller
         $token = $request->input('token');
 
         if ($token) {
-            $this->github->authenticate($token);
+            $this->github->authenticate(new TokenAuthenticator($token));
         }
 
         $type = $request->input('type', 'owner');
@@ -159,7 +160,7 @@ class GitHubApiController extends Controller
         $token = $request->input('token');
 
         if ($token) {
-            $this->github->authenticate($token);
+            $this->github->authenticate(new TokenAuthenticator($token));
         }
 
         $name = $request->input('name');

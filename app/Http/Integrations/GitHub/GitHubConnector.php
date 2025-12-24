@@ -33,7 +33,7 @@ class GitHubConnector extends Connector
     protected function defaultAuth(): ?Authenticator
     {
         if ($this->token) {
-            return new TokenAuthenticator($this->token, 'Bearer');
+            return new TokenAuthenticator($this->token);
         }
 
         return null;
