@@ -207,7 +207,7 @@ const formattedResponse = computed(() => {
                                                 id="auth-token"
                                                 v-model="token"
                                                 type="password"
-                                                placeholder="ghp_xxxxxxxxxxxx"
+                                                placeholder="github_pat_xxxxxxxxxxxx"
                                             />
                                         </div>
                                         <Button
