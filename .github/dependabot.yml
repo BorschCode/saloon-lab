@@ -1,0 +1,59 @@
+version: 2
+
+updates:
+  # ─────────────────────────────
+  # PHP / Composer dependencies
+  # ─────────────────────────────
+  - package-ecosystem: "composer"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Kyiv"
+    open-pull-requests-limit: 5
+    versioning-strategy: "increase"
+    labels:
+      - "dependencies"
+      - "php"
+    commit-message:
+      prefix: "deps(composer)"
+    ignore:
+      # Ignore major Laravel upgrades (do manually)
+      - dependency-name: "laravel/framework"
+        update-types: ["version-update:semver-major"]
+
+  # ─────────────────────────────
+  # Node / NPM dependencies
+  # ─────────────────────────────
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Kyiv"
+    open-pull-requests-limit: 5
+    versioning-strategy: "increase"
+    labels:
+      - "dependencies"
+      - "frontend"
+    commit-message:
+      prefix: "deps(npm)"
+    ignore:
+      # Avoid surprise frontend framework breakage
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  # ─────────────────────────────
+  # GitHub Actions
+  # ─────────────────────────────
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    labels:
+      - "dependencies"
+      - "ci"
+    commit-message:
+      prefix: "deps(actions)"
