@@ -69,7 +69,7 @@ resources/js/
 - Docker and Docker Compose
 - Git
 
-### Installation
+### Installation (First Run with Docker Compose)
 
 1. **Clone the repository**
 ```bash
@@ -77,35 +77,90 @@ git clone <repository-url>
 cd saloon-demo
 ```
 
-2. **Install dependencies**
-```bash
-vendor/bin/sail up -d
-vendor/bin/sail composer install
-vendor/bin/sail npm install
-```
-
-3. **Set up environment**
+2. **Prepare environment file**
 ```bash
 cp .env.example .env
-vendor/bin/sail artisan key:generate
+```
+Adjust ports if needed (defaults: `APP_PORT=8047`, `VITE_PORT=5123`, `APP_SERVICE=saloon-demo`).
+
+3. **Build and start containers**
+
+If you use Laravel Sail wrapper:
+```bash
+./vendor/bin/sail up -d --build
 ```
 
-4. **Run migrations**
+If Sail is not yet installed (first run), use Docker Compose directly:
 ```bash
-vendor/bin/sail artisan migrate
+docker compose up -d --build
 ```
 
-5. **Build frontend assets**
+This will:
+- Build PHP container
+- Start MySQL
+- Start Node container
+- Create network and volumes
+
+4. **Install backend dependencies (inside container)**
 ```bash
-vendor/bin/sail npm run build
-# or for development
-vendor/bin/sail npm run dev
+docker compose exec saloon-demo composer install
+```
+Or with Sail:
+```bash
+./vendor/bin/sail composer install
 ```
 
-6. **Open the application**
+5. **Generate application key**
 ```bash
-vendor/bin/sail open
-# or visit http://localhost:8047
+docker compose exec saloon-demo php artisan key:generate
+```
+
+6. **Run database migrations**
+```bash
+docker compose exec saloon-demo php artisan migrate
+```
+
+7. **Install frontend dependencies**
+```bash
+docker compose exec saloon-demo npm install
+```
+
+8. **Build frontend assets**
+```bash
+# Production build
+docker compose exec saloon-demo npm run build
+
+# Development mode (watch)
+docker compose exec saloon-demo npm run dev
+```
+
+9. **Open the application**
+
+If using Sail helper:
+```bash
+./vendor/bin/sail open
+```
+
+Otherwise visit:
+```
+http://localhost:8047
+```
+
+### Useful Docker Commands
+
+Stop containers:
+```bash
+docker compose down
+```
+
+Stop and remove volumes (fresh start):
+```bash
+docker compose down -v
+```
+
+Rebuild containers:
+```bash
+docker compose up -d --build
 ```
 
 ## 🔑 GitHub API Authentication
