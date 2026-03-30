@@ -19,7 +19,7 @@ class GetAuthenticatedUserRepositories extends Request
         protected int $page = 1,
     ) {}
 
-    public function resolveEndpoint(): string
+    public function endpoint(): string
     {
         return '/user/repos';
     }

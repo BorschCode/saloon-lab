@@ -17,7 +17,7 @@ class GitHubConnector extends Connector
         protected ?string $token = null,
     ) {}
 
-    public function resolveBaseUrl(): string
+    public function baseUrl(): string
     {
         return 'https://api.github.com';
     }

@@ -1,6 +1,6 @@
 # Nexus API Lab 🚀
 
-A comprehensive demonstration of **SaloonPHP v3** integration with Laravel 12, Inertia.js, and Vue 3. This project showcases how to build clean, maintainable, and testable API integrations using modern PHP best practices.
+A comprehensive demonstration of **SaloonPHP v4** integration with Laravel 12, Inertia.js, and Vue 3. This project showcases how to build clean, maintainable, and testable API integrations using modern PHP best practices.
 
 ![GitHub API Explorer](docs/dashboard.png)
 
@@ -25,7 +25,7 @@ An interactive web interface to test all GitHub API endpoints with real-time res
 ### 🔧 Technology Stack
 
 - **Laravel 12** - Modern PHP framework with streamlined architecture
-- **SaloonPHP v3** - Elegant API integration library
+- **SaloonPHP v4** - Elegant API integration library
 - **Inertia.js v2** - Modern SPA without the API
 - **Vue 3** - Progressive JavaScript framework
 - **Tailwind CSS v4** - Utility-first CSS framework
@@ -186,7 +186,7 @@ class GitHubConnector extends Connector
 {
     use AcceptsJson;
 
-    public function resolveBaseUrl(): string
+    public function baseUrl(): string
     {
         return 'https://api.github.com';
     }
@@ -205,7 +205,7 @@ class GetUser extends Request
 
     public function __construct(protected string $username) {}
 
-    public function resolveEndpoint(): string
+    public function endpoint(): string
     {
         return "/users/{$this->username}";
     }
@@ -309,7 +309,7 @@ vendor/bin/sail artisan optimize:clear
 ### SaloonPHP Documentation
 - [Official Docs](https://docs.saloon.dev)
 - [GitHub Repository](https://github.com/saloonphp/saloon)
-- [Upgrade Guide v2 → v3](https://docs.saloon.dev/upgrade/upgrading-from-v2)
+- [Upgrade Guide v3 → v4](https://docs.saloon.dev/upgrade/upgrading-from-v3-to-v4)
 
 ### Laravel Ecosystem
 - [Laravel 12 Documentation](https://laravel.com/docs/12.x)

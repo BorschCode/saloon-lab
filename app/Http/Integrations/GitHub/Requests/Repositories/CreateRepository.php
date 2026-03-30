@@ -22,7 +22,7 @@ class CreateRepository extends Request implements HasBody
         protected bool $autoInit = false,
     ) {}
 
-    public function resolveEndpoint(): string
+    public function endpoint(): string
     {
         return '/user/repos';
     }

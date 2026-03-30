@@ -16,7 +16,7 @@ class GetRepository extends Request
         protected string $repo,
     ) {}
 
-    public function resolveEndpoint(): string
+    public function endpoint(): string
     {
         return "/repos/{$this->owner}/{$this->repo}";
     }

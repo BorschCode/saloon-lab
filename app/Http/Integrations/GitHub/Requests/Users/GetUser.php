@@ -15,7 +15,7 @@ class GetUser extends Request
         protected string $username,
     ) {}
 
-    public function resolveEndpoint(): string
+    public function endpoint(): string
     {
         return "/users/{$this->username}";
     }

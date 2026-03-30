@@ -17,7 +17,7 @@ class GetUserFollowing extends Request
         protected int $page = 1,
     ) {}
 
-    public function resolveEndpoint(): string
+    public function endpoint(): string
     {
         return "/users/{$this->username}/following";
     }

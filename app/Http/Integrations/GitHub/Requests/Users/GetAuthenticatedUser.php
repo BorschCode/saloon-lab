@@ -11,7 +11,7 @@ class GetAuthenticatedUser extends Request
 {
     protected Method $method = Method::GET;
 
-    public function resolveEndpoint(): string
+    public function endpoint(): string
     {
         return '/user';
     }
